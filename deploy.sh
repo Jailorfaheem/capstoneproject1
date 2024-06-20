@@ -1,31 +1,21 @@
 #!/bin/bash
+docker-compose up -d
+docker login -u faheemjailor -p $DOCKER_PASSWORD
 
-# Docker Credentials
-DOCKER_IMAGE="capstoneproject"
-DOCKER_TAG="latest"
-DOCKER_USERNAME="faheemjailor"
-DOCKER_PASSWORD="Faheem@8329"
-DOCKER_REPO="${DOCKER_USERNAME} /${DOCKER_IMAGE}:${DOCKER_TAG}"
+if [[ $GIT_BRANCH == "origin/dev" ]]; then
+       sh'chmod +x build.sh'
+       sh'./build.sh'
 
-#Login to Docker hub using variables
-echo "DOCKER_PASSWORD" | docker login -u "DOCKER_ISERNAME" --password-stdin
+        docker tag test faheemjailor/dev
+        docker push faheemjailor/dev
 
+if [[ $GIT_BRANCH == "origin/master" ]]; then
+        sh'chmod +x build.sh'
+        sh'./build.sh'
 
-# Check if the Login was Successfull 
-if [$? -ne 0 ];then
-   echo "Error: Docker Login failed."
-   exit 1
-fi
+        docker tag test faheemjailor/prod
+        docker push faheemjailor/prod
 
-# Tag the docker image
-docker tag "$DOCKER_IMAGE" "DOCKER_REPO"
-
-# Push the Docker Image
-docker path "$DOCKER_REPO"
-
-#Check if the push was successfull
-if [$? -eq 0 ]: then
- echo "Docker image '$DOCKER_REPO' Pushed Successfully to Docker Hub"
 else
- echo "Error: Failed to push Docker Images"
+        echo "failed"
 fi
