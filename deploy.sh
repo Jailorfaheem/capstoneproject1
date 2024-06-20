@@ -7,12 +7,12 @@ if [[ $GIT_BRANCH == "origin/dev" ]]; then
     sh './build.sh'
 
     # Log in to Docker Hub (replace with your actual Docker Hub credentials)
-    docker login -u faheemjailor01 -p $DOCKER_PASSWORD
+    docker login -u faheemjailor1 -p $DOCKER_PASSWORD
     # Tag the image
-    docker tag test faheemjailor01/dev
+    docker tag test faheemjailor1/dev
 
     # Push the image to the Dev Docker Hub repository
-    docker push faheemjailor01/dev
+    docker push faheemjailor1/dev
 
 
 elif [[ $GIT_BRANCH == "origin/main" ]]; then
@@ -21,12 +21,12 @@ elif [[ $GIT_BRANCH == "origin/main" ]]; then
     sh './build.sh'
 
     # Log in to Docker Hub (replace with your actual Docker Hub credentials)
-    docker login -u faheemjailor01  -p $DOCKER_PASSWORD
+    docker login -u faheemjailor1  -p $DOCKER_PASSWORD
 
    
     # Tag the image
-    docker tag test faheemjailor01/prod 
+    docker tag test faheemjailor1/prod 
 
     # Push the image to the Prod Docker Hub repository
-    docker push faheemjailor01/prod
+    docker push faheemjailor1/prod
 fi
