@@ -1,17 +1,32 @@
 #!/bin/bash
+
+# Check the Git branch
 if [[ $GIT_BRANCH == "origin/dev" ]]; then
-       sh 'chmod +x build.sh'
-       sh './build.sh'
-       docker tag test faheemjailor1/dev
-        docker push faheemjailor1/dev
+    # Build your project
+    sh 'chmod +x build.sh'
+    sh './build.sh'
 
-if [[ $GIT_BRANCH == "origin/master" ]]; then
-        sh 'chmod +x build.sh'
-        sh './build.sh'
+    # Log in to Docker Hub (replace with your actual Docker Hub credentials)
+    docker login -u faheemjailor1 -p $DOCKER_PASSWORD
+    # Tag the image
+    docker tag test faheemjailor1/dev
 
-        docker tag test faheemjailor1/prod
-        docker push faheemjailor1/prod
+    # Push the image to the Dev Docker Hub repository
+    docker push faheemjailor1/dev
 
-else
-        echo "failed"
+
+elif [[ $GIT_BRANCH == "origin/main" ]]; then
+    # Build your project
+    sh 'chmod +x build.sh'
+    sh './build.sh'
+
+    # Log in to Docker Hub (replace with your actual Docker Hub credentials)
+    docker login -u faheemjailor1  -p $DOCKER_PASSWORD
+
+   
+    # Tag the image
+    docker tag test faheemjailor1/prod 
+
+    # Push the image to the Prod Docker Hub repository
+    docker push faheemjailor1/prod
 fi
