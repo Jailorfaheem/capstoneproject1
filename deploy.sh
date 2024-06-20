@@ -1,5 +1,5 @@
 #!/bin/bash
-docker-compose up -d
+
 docker login -u faheemjailor -p $DOCKER_PASSWORD
 
 if [[ $GIT_BRANCH == "origin/dev" ]]; then
