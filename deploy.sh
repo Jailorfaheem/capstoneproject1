@@ -15,7 +15,7 @@ if [[ $GIT_BRANCH == "origin/dev" ]]; then
     docker push faheemjailor1/dev
 
 
-elif [[ $GIT_BRANCH == "origin/main" ]]; then
+elif [[ $GIT_BRANCH == "origin/prod" ]]; then
     # Build your project
     sh 'chmod +x build.sh'
     sh './build.sh'
